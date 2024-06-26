@@ -4,6 +4,7 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "./dist",
+    "lib": ["es6"],
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
