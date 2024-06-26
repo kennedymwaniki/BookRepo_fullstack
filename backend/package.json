@@ -1,5 +1,5 @@
 {
-  "name": ".",
+  "name": "backend",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
