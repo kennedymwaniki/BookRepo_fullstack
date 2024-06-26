@@ -1,0 +1,23 @@
+###
+GET http://localhost:3000/api/books
+
+
+###
+GET http://localhost:3000/api/books/2
+
+###
+DELETE  http://localhost:3000/api/books/12
+
+###
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+    "title": "Book of life",
+    "author": "Author Zoro",
+    "year":2020
+}
+
+
+
+GET http://localhost:3000/api/books/2
