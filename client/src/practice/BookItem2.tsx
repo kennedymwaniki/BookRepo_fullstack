@@ -5,10 +5,10 @@ import { BookState, BookAction } from "../components/BookReducer";
 interface BookItemProps {
   book: BookState;
   dispatch: React.Dispatch<BookAction>;
-  fetchBooks: () => void;
+  
 }
 
-const BookItem2: React.FC<BookItemProps> = ({ book, dispatch, fetchBooks }) => {
+const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(book.title);
   const [author, setAuthor] = useState(book.author);
@@ -34,11 +34,10 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch, fetchBooks }) => {
       dispatch({ type: "UPDATE", payload: response.data });
       console.log(response.data);
       setIsEditing(false);
-      fetchBooks();
     } catch (error) {
       console.error("Failed to update book:", error);
     }
-  }, [book, title, author, year, dispatch, fetchBooks]);
+  }, [book, title, author, year, dispatch]);
 
   const handleDelete = useCallback(async () => {
     try {
@@ -46,11 +45,10 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch, fetchBooks }) => {
         `https://bookrepo-backend-g5i9.onrender.com/api/books/${book.id}`
       );
       dispatch({ type: "DELETE", payload: book.id });
-      fetchBooks();
     } catch (error) {
       console.error("Failed to delete book:", error);
     }
-  }, [book.id, dispatch, fetchBooks]);
+  }, [book.id, dispatch]);
 
   return (
     <tr className="book-item">

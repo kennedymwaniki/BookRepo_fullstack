@@ -68,7 +68,6 @@ const App2: React.FC = () => {
       setTitle("");
       setAuthor("");
       setYear("");
-      fetchBooks();
     } catch (error) {
       console.error("Failed to add book:", error);
     }
@@ -132,7 +131,7 @@ const App2: React.FC = () => {
             </thead>
             <tbody>
               {currentBooks.map((book) => (
-                <BookItem2 key={book.id} book={book} dispatch={dispatch} fetchBooks={fetchBooks} />
+                <BookItem2 key={book.id} book={book} dispatch={dispatch}  />
               ))}
             </tbody>
           </table>
