@@ -58,8 +58,12 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
             <input value={year} onChange={(e) => setYear(e.target.value)} />
           </td>
           <td>
-            <button onClick={handleUpdate}>Update</button>
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
+            <button className="update" onClick={handleUpdate}>
+              Update
+            </button>
+            <button className="cancel" onClick={() => setIsEditing(false)}>
+              Cancel
+            </button>
           </td>
         </>
       ) : (
@@ -68,8 +72,12 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
           <td>{book.author}</td>
           <td>{book.year}</td>
           <td>
-            <button onClick={() => setIsEditing(true)}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button className="edit" onClick={() => setIsEditing(true)}>
+              Edit
+            </button>
+            <button className="delete" onClick={handleDelete}>
+              Delete
+            </button>
           </td>
         </>
       )}

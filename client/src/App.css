@@ -106,6 +106,52 @@ h1 {
   background-color: #0056b3;
 }
 
+.edit {
+  background-color: #039525;
+  padding: 8px 16px;
+  font-size: 14px;
+
+  margin: 0 6px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.update {
+  background-color: #039525;
+  padding: 8px 14px;
+  font-size: 12px;
+
+  margin: 0 5px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.delete {
+  background-color: #e70707;
+  padding: 8px 16px;
+  font-size: 14px;
+
+  margin: 0 5px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.cancel {
+  background-color: #e70707;
+  padding: 6px 10px;
+  font-size: 14px;
+
+  margin: 0 5px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 /* loader start */
 
 .loader {
