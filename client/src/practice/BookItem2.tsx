@@ -31,6 +31,7 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
         }
       );
       dispatch({ type: "UPDATE", payload: response.data });
+      console.log(response.data);
       setIsEditing(false);
     } catch (error) {
       console.error("Failed to update book:", error);
@@ -47,7 +48,6 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
       console.error("Failed to delete book:", error);
     }
   }, [book.id, dispatch]);
-
 
   return (
     <tr className="book-item">
