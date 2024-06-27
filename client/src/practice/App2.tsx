@@ -132,7 +132,7 @@ const App2: React.FC = () => {
             </thead>
             <tbody>
               {currentBooks.map((book) => (
-                <BookItem2 key={book.id} book={book} dispatch={dispatch} />
+                <BookItem2 key={book.id} book={book} dispatch={dispatch} fetchBooks={fetchBooks} />
               ))}
             </tbody>
           </table>
