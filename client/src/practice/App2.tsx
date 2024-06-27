@@ -68,6 +68,7 @@ const App2: React.FC = () => {
       setTitle("");
       setAuthor("");
       setYear("");
+      fetchBooks();
     } catch (error) {
       console.error("Failed to add book:", error);
     }
