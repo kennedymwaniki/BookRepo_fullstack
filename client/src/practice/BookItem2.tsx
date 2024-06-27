@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import axios from "axios";
 import { BookState, BookAction } from "../components/BookReducer";
 
 interface BookItemProps {
@@ -19,30 +20,34 @@ const BookItem2: React.FC<BookItemProps> = ({ book, dispatch }) => {
       author,
       year: parseInt(year),
     };
-    const response = await fetch(
-      `https://bookrepo-backend-g5i9.onrender.com/api/books/${book.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedBook),
-      }
-    );
-    const data = await response.json();
-    dispatch({ type: "UPDATE", payload: data });
-    setIsEditing(false);
+    try {
+      const response = await axios.put(
+        `https://bookrepo-backend-g5i9.onrender.com/api/books/${book.id}`,
+        updatedBook,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch({ type: "UPDATE", payload: response.data });
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Failed to update book:", error);
+    }
   }, [book, title, author, year, dispatch]);
 
   const handleDelete = useCallback(async () => {
-    await fetch(
-      `https://bookrepo-backend-g5i9.onrender.com/api/books/${book.id}`,
-      {
-        method: "DELETE",
-      }
-    );
-    dispatch({ type: "DELETE", payload: book.id });
+    try {
+      await axios.delete(
+        `https://bookrepo-backend-g5i9.onrender.com/api/books/${book.id}`
+      );
+      dispatch({ type: "DELETE", payload: book.id });
+    } catch (error) {
+      console.error("Failed to delete book:", error);
+    }
   }, [book.id, dispatch]);
+
 
   return (
     <tr className="book-item">

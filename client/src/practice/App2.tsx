@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useReducer, useEffect, useCallback } from "react";
+import axios from "axios";
 import BookItem2 from "./BookItem2";
 import "../App.css";
 import { BookReducer, BookState } from "../components/BookReducer";
@@ -19,11 +19,10 @@ const App2: React.FC = () => {
   const fetchBooks = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(
+      const response = await axios.get(
         "https://bookrepo-backend-g5i9.onrender.com/api/books"
       );
-      const data = await response.json();
-      dispatch({ type: "LOAD", payload: data });
+      dispatch({ type: "LOAD", payload: response.data });
     } catch (error) {
       console.error("Failed to fetch books:", error);
     } finally {
@@ -33,12 +32,15 @@ const App2: React.FC = () => {
 
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [fetchBooks]);
+
+  // useEffect(() => {
+  //   console.log("Books updated:", books);
+  // }, [books]);
 
   useEffect(() => {
     setFilteredBooks(
       books.filter((book) =>
-        //if the book title is undefined the function is not executed
         book.title?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
@@ -51,21 +53,24 @@ const App2: React.FC = () => {
       author,
       year: parseInt(year),
     };
-    const response = await fetch(
-      "https://bookrepo-backend-g5i9.onrender.com/api/books",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newBook),
-      }
-    );
-    const data = await response.json();
-    dispatch({ type: "ADD", payload: data });
-    setTitle("");
-    setAuthor("");
-    setYear("");
+    try {
+      const response = await axios.post(
+        "https://bookrepo-backend-g5i9.onrender.com/api/books",
+        newBook,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch({ type: "ADD", payload: response.data });
+      console.log(books);
+      setTitle("");
+      setAuthor("");
+      setYear("");
+    } catch (error) {
+      console.error("Failed to add book:", error);
+    }
   };
 
   const handlePagination = (direction: "next" | "prev") => {
